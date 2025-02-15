@@ -50,4 +50,7 @@ def execute_sql_script(script_path):
             print("🔌 Connection closed.")
 
 # Run the script
+# Run both schema_changes.sql and add_departments.sql
 execute_sql_script('schema_changes.sql')
+execute_sql_script('add_departments.sql')
+
