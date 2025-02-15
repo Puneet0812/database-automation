@@ -1,0 +1,32 @@
+name: Database CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      MYSQL_HOST: puneet-mysql-server.mysql.database.azure.com
+      MYSQL_USER: puneetadmin
+      MYSQL_PASSWORD: Azure@1234
+      MYSQL_DATABASE: companydb
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+
+      - name: Install MySQL Connector
+        run: pip install mysql-connector-python
+
+      - name: Apply Database Changes
+        run: |
+          python schema_automation.py
